@@ -1,0 +1,5 @@
+[user]
+	name = kunal-kapur
+	email = kunalkapur888@gmail.com
+[alias]
+	add-commit = !git add -A && git commit

@@ -1,5 +1,7 @@
 
+
 alias activate="source .venv/bin/activate"
+alias python="python3.13"
 
 function cd {
     flag=0
@@ -11,9 +13,8 @@ function cd {
     # For example:
         if [ -d ".venv" ]; then
             activate
-         # HW Assingments are configured oddly so uncommenting this for now
-         #elif [[ flag -eq "1" ]]; then
-            #deactivate
+         elif [[ flag -eq "1" ]]; then
+            deactivate
        fi
 }
 
@@ -38,3 +39,8 @@ PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:${PATH}"
 PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin/"
 export PATH
 
+
+# Setting PATH for Python 3.13
+# The original version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.13/bin:${PATH}"
+export PATH

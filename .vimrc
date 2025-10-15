@@ -42,3 +42,12 @@ set hlsearch
 
 " Set the commands to save in history default number is 20.
 set history=1000
+
+if v:version < 802
+    packadd! dracula
+endif
+syntax enable
+colorscheme dracula
+
+
+

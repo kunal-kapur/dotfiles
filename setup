@@ -1,0 +1,44 @@
+#!/bin/bash
+eval "$(ssh-agent -s)"
+ssh-add ~/kkapur-v2/.ssh/id_ed25519
+
+echo 'alias activate="source .venv/bin/activate"' >> ~/.bash_aliases
+source ~/.bash_aliases
+
+function cd {
+    flag=0
+    if [ -e ".venv" ]; then
+        flag=1
+    fi
+    builtin cd "$@"
+    # Add your command here
+    # For example:
+        if [ -d ".venv" ]; then
+            activate
+         elif [[ flag -eq "1" ]]; then
+            deactivate
+       fi
+}
+
+# --- 2. Configure Git with user info ---
+# Set the global user name
+git config --global user.name "kunal-kapur"
+
+# Set the global user email
+git config --global user.email "kunalkapur888@gmail.com"
+
+echo "Git user name and email configured globally."
+
+
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+export PS1="\u@\h \[\033[32m\]\w\[\033[36m\]\$(parse_git_branch)\[\033[00m\] $ "
+
+rm -rf $HOME/.vim
+rm -f $HOME/.vimrc
+cp -r $HOME/kkapur-v2/.vim $HOME/
+cp  $HOME/kkapur-v2/.vimrc $HOME/
+
+
+
